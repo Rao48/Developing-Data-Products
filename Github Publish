@@ -1,0 +1,76 @@
+Developing Data Products Slides
+========================================================
+author: Jaja Yogo
+date: 8/23/2015
+
+Introduction
+========================================================
+
+- Introduction
+- Data Presentation
+- Data Anaylsis
+
+We will have a look at Storm Database explorer.
+This application is based on the U.S. National Oceanic 
+and Atmospheric Administration's (NOAA) storm database.
+Dataset has been obtained from the Coursera Reproducible 
+Research Course site and processed as a part of peer assignment for the course. 
+Full description of the processing workflow is available on RPubs.
+Source code is available on the GitHub.
+You can adjust date range and event types using control panel located on the left side. Cleaned dataset can be downloaded using data tab.
+
+
+Down Load Data
+========================================================
+
+- Brief Synopsis
+In this file we will get only some information from a big data set to answer the questions about the damages and injuries or fatalities caused by natural events. 
+You can download data as follows:
+
+```{r,cache=T}download.file("http://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2", destfile="stormdata.bz2")
+```
+
+
+```{r,cache=T}unzip("stormdata.bz2")
+rawdata <- read.csv("repdata-data-StormData.csv",                    
+sep=",", header=TRUE, nrow=902297)
+```
+
+Let us check the data sample.
+
+```{r}str(rawdata)
+```
+
+Now we can evaluate selected data.
+
+Data Exploration
+========================================================
+
+```{r, echo=FALSE} library(ggplot2) g <- ggplot(popdata[1:15, ], 
+            aes(x = reorder(EVTYPE, TOT), 
+                y = TOT))
+g <- g + geom_bar(stat="identity")
+g <- g + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+g <- g + labs(x = "Event type")
+g <- g + labs(y = "Total fatalities and injuries.")
+g <- g + labs(title = "Event Types in US by fatalities and injuries.")
+print(g)
+g <- ggplot(dmgdata[1:15, ], 
+```
+
+Plot2
+========================================================
+
+```{r, echo=FALSE}aes(x = reorder(EVTYPE, TOT),  y = TOT))
+g <- g + geom_bar(stat="identity")
+g <- g + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+g <- g + labs(x = "Event type")
+g <- g + labs(y = "Total damage in dollars.")
+g <- g + labs(title = "Event Types in US by damage in property and crops.")
+print(g)
+```
+
+Conclusion:
+========================================================
+
+The evaluation clearly shows that tornadoes are more hazadous to health conditions, floods is the most damaging natural calamity to property and crops.
