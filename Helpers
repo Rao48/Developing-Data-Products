@@ -1,4 +1,4 @@
-Developers.R
+#helpers.R
 #' Aggregate dataset by state
 #' 
 #' @param dt data.table
